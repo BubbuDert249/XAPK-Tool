@@ -1,0 +1,106 @@
+Ęţşľ   AQ
+      java/lang/Object <init> ()V	  	 
+   java/lang/System out Ljava/io/PrintStream;  ,Usage: xapktool -d <input.xapk> <output-dir>
+      java/io/PrintStream println (Ljava/lang/String;)V  )or: xapktool -b <input-dir> <output.xapk>  or: xapktool -v <input.xapk>  -d
+       java/lang/String equals (Ljava/lang/Object;)Z
+ " # $ % & com/bubbudert/xapktool/XAPKTool handleDecompile ([Ljava/lang/String;)V ( -b
+ " * + & handleBuild - -v
+ " / 0 & 
+handleView 2 Unknown command. 4 .xapk
+  6 7 8 endsWith (Ljava/lang/String;)Z : %Input file must have .xapk extension. < .zip
+  > ? @ replace D(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String; B java/io/File
+ A D  
+ A F G H toPath ()Ljava/nio/file/Path; J java/nio/file/CopyOption	 L M N O P  java/nio/file/StandardCopyOption REPLACE_EXISTING "Ljava/nio/file/StandardCopyOption;
+ R S T U V java/nio/file/Files copy Y(Ljava/nio/file/Path;Ljava/nio/file/Path;[Ljava/nio/file/CopyOption;)Ljava/nio/file/Path;
+ " X Y Z 	unzipFile '(Ljava/lang/String;Ljava/lang/String;)V
+ R \ ] ^ delete (Ljava/nio/file/Path;)V
+ " ` a Z createXAPKToolXml c _decompiled.zip
+ " e f Z zipDirectoryContents h Decompile complete. j java/io/IOException
+ i l m  printStackTrace
+ R o p V move
+ " r s  deleteXAPKToolXml u Build complete. w output
+ " y z  openManifestWithNotepad
+ " | } ~ deleteDirectory (Ljava/io/File;)V € View complete. ‚ os.name
+  „ … † getProperty &(Ljava/lang/String;)Ljava/lang/String;
+   ‰ Š toLowerCase ()Ljava/lang/String; Ś win
+  Ž Ź  contains (Ljava/lang/CharSequence;)Z   ’ “ ” makeConcatWithConstants 8(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+ " – —  executeCommand  ’ š 
+manifest.json
+ A ś  Z
+ A ž ź   exists ()Z
+ A ˘ Ł Š getAbsolutePath  Ą “ † § manifest.json not found. © java/lang/ProcessBuilder «  
+  ­ ® Ż split '(Ljava/lang/String;)[Ljava/lang/String;
+ ¨ ±  &
+ ¨ ł ´ µ 	inheritIO ()Ljava/lang/ProcessBuilder;
+ ¨ · ¸ ą start ()Ljava/lang/Process;
+ » Ľ ˝ ľ ż java/lang/Process waitFor ()I  Á “ Â (I)Ljava/lang/String; Ä java/lang/InterruptedException
+ Ć l Ç java/lang/Exception É java/util/zip/ZipOutputStream Ë java/io/FileOutputStream
+ Ę D
+ Č Î  Ď (Ljava/io/OutputStream;)V
+ A Ń Ň Ó 	listFiles ()[Ljava/io/File;
+ A Ő Ö   isFile Ř java/io/FileInputStream
+ × Ú  ~ Ü java/util/zip/ZipEntry
+ A Ţ ß Š getName
+ Ű D
+ Č â ă ä putNextEntry (Ljava/util/zip/ZipEntry;)V
+ × ć ç č read ([B)I
+ Č ę ë ě write ([BII)V
+ Č î ď  
+closeEntry
+ × ń ň  close ô java/lang/Throwable
+ ó ö ÷ ř 
+addSuppressed (Ljava/lang/Throwable;)V
+ Č ń
+ A ű ü   isDirectory ţ xapktool.xml  java/io/BufferedWriter java/io/FileWriter
+ Ú
+ ˙  (Ljava/io/Writer;)V '<?xml version="1.0" encoding="UTF-8"?>
+
+ ˙
+ ë  <xapkToolInfo>
+ "    <toolName>XAPKTool</toolName>
+     <version>1.0</version>
+ `    <description>This file was created by XAPKTool during the decompiling process</description>
+  Ą  Ą java/text/SimpleDateFormat yyyy-MM-dd'T'HH:mm:ss
+ D java/util/Date
+ 
+  format $(Ljava/util/Date;)Ljava/lang/String;  Ą# </xapkToolInfo>
+% xapktool.xml created.
+ ˙ ń( xapktool.xml deleted. Code LineNumberTable main 
+StackMapTable. [Ljava/lang/String; 
+Exceptions1 [Ljava/io/File;3 [B 
+SourceFile 
+XAPKTool.java BootstrapMethods8 Apowershell -Command Expand-Archive -Path "" -DestinationPath "": unzip "" -d ""< notepad ""> Command failed with exit code @     <inputXAPK></inputXAPK>
+B     <outputDir></outputDir>
+D     <timestamp></timestamp>
+F
+GHI “J $java/lang/invoke/StringConcatFactory (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/invoke/CallSite; InnerClassesM %java/lang/invoke/MethodHandles$LookupO java/lang/invoke/MethodHandles Lookup ! "          )        *· ±   *       	 	+ & )   ş     \*ľ˘ ˛ 
+¶ ˛ ¶ ˛ ¶ ±*2L+¶ ™ 
+*¸ !§ +'+¶ ™ 
+*¸ )§ ,+¶ ™ 
+*¸ .§ ˛ 1¶ ±   *   :      
+         #  ,  3  <  C  L  S  [ ,    ü   
+ % & )       €*2L*2M+3¶ 5š ˛ 9¶ ±+3;¶ =N» AY+· C:» AY-· C:¶ E¶ E˝ IY˛ KS¸ QW-,¸ W¶ E¸ [,+¸ _,+3b¶ =¸ d˛ g¶ § 
+:¶ k±  7 u x i *   J       !  $  %  &  ( # ) - * 7 . O 0 T 2 \ 5 a 8 m : u = x ; z <  >,   ( ý   ˙ ] -    A A  i 
+ + & )   ş     V*2L*2M+,3;¶ =¸ d» AY,3;¶ =· CN-¶ E» AY,· C¶ E˝ IY˛ KS¸ nW+¸ q˛ t¶ § N-¶ k±   M P i *   .    A  B  F  G $ H A K E M M P P N Q O U Q,    ˙ P -    i 
+ 0 & )       *2L+3¶ 5š ˛ 9¶ ±+3;¶ =M» AY+· CN» AY,· C:-¶ E¶ E˝ IY˛ KS¸ QWv:,¸ W¸ x¶ E¸ [» AY· C¸ {˛ ¶ § 
+:¶ k±  2 t w i *   J    T  W 
+ X  Y  [  \ ( ] 2 a I c M d S f X i ` l l n t q w o y p ~ r,   " ü  ˙ ` -   A A  i 
+ Y Z )   a     *¸ ¶ ‡M,‹¶ Ť™ *+ş ‘  ¸ •§ 
+*+ş   ¸ •±   *       u 	 w  y  | ) ~,   	 ü  	/     i 
+ z  )   a     *» AY*™· ›L+¶ ť™ +¶ ˇş ¤  ¸ •§ ˛ ¦¶ ±   *         ‚   ! … ) ‡,   	 ü ! A 
+ —  )        6» ¨Y*Ş¶ ¬· °L+¶ ˛W+¶ ¶M,¶ ş>™ ˛ ş Ŕ  ¶ § L+¶ Ĺ±    - 0 i   - 0 Ă *   * 
+   ‹  Ś  Ť  Ž  Ź !  - ” 0 ’ 1 “ 5 •,    -B Ć 
+ f Z )    
+   Ç» ČY» ĘY+· Ě· ÍM» AY*· CN-¶ Đ:Ć Ś:ľ66˘ y2:¶ Ô™ d» ×Y· Ů:	» ŰY¶ Ý· ŕ:
+,
+¶ á Ľ:	¶ ĺY6› ,¶ é§˙ę,¶ í	¶ đ§ :
+	¶ đ§ :
+¶ ő
+ż„§˙†,¶ ů§ N,¶ ů§ :-¶ ő-ż±  Q ‰ ‘ ó “  › ó  ­ ´ ó µ ą Ľ ó *   N      ™  š  › $ ś > ť F ž Q ź _   e ˇ l Ł y ¤ … ¦ ‰ § ‘ ž § ś ­ « ´  Ć ¬,   Ĺ ˙ 0    Č A00  ˙ ;    Č A00 A × Ű2  ü ˙  
+   Č A00 A ×  ó˙ 	    Č A00 A × ó  óř ˙     Č  F ó˙     Č ó  óů /     i 
+ } ~ )   Ż     J*¶ ť™ E*¶ ĐL+Ć 5+M,ľ>6˘ ',2:¶ ú™ ¸ {§ ¶ E¸ [„§˙Ů*¶ E¸ [±   *   * 
+   Ż  °  ±  ˛ $ ł , ´ 4 ¶ < ˛ B ş I Ľ,   # ˙   A00  ü  Aú ř ú /     i 
+ a Z )  h     ¬» AY*ý· ›M» ˙Y»Y,··N-¶	-¶	-
+¶	-¶	-¶	-+ş  ¶	-*ş  ¶	»Y·:»Y·¶:-ş!  ¶	-"¶	˛ $¶ -¶&§ :-¶&§ :¶ őż§ N-¶ k±   ‡ Ž ó  ” — ó  Ł ¦ i *   R    ż  Á  Â " Ă ) Ä 0 Ĺ 7 Ć > Ç H Č R Ë ^ Ě l Í w Ď ~ Ń ‡ Ň Ž Á Ł Ô ¦ Ň § Ó « Ő,   : ˙ Ž    A ˙  ó˙     A ˙ ó  óů B i 
+ s  )   €     +» AY*ý· ›L+¶ ť™ +¶ E¸ [˛ '¶ § M,¶ k±   " % i *   "    Ř  Ů  Ű  Ü " ß % Ý & Ţ * á,    ˙ %   A  i 4   56   , E 7E 9E ;E =E ?E AE CK   
+ LNP 
