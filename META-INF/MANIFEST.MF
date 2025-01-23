@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: com.bubbudert.xapktool.XAPKTool
+Created-By: 21.0.5 (Eclipse Adoptium)
+
+Name: com/bubbudert/xapktool/XAPKTool.class
+SHA-384-Digest: hSk1G0jY7abC3tLKtH+qTdd/G9ZjYIzK9yUdARdmXQMmxboeFfFVb6Rl
+ wJB6wlly
+
